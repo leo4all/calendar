@@ -9,7 +9,42 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 <body>
-    
+    <div class="container">
+        <div class="jumbotron">
+            <h2>number8</h2>
+            <h5>Programming Exercise UI Devs</h5><br>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Calendar</div>
+                        <div class="card-body">
+                            <form action="#">
+                                <div class="form-group">
+                                    <label for="cal_start_date">Start Date:</label>
+                                    <input type="date" name="cal_start_date" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cal_number_of_days">Number of days:</label>
+                                    <input type="number" name="cal_num_of_dates" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cal_country_code">Country Code: </label>
+                                    <input type="text" name="cal_country_code" class="form-control">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body" id="calendar-display">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
