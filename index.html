@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-header">Calendar</div>
                         <div class="card-body">
-                            <form action="#">
+                            <form action="#" id="form">
                                 <div class="form-group">
                                     <label for="cal_start_date">Start Date:</label>
                                     <input type="date" name="cal_start_date" class="form-control">
@@ -31,13 +31,16 @@
                                     <label for="cal_country_code">Country Code: </label>
                                     <input type="text" name="cal_country_code" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Go" class="btn btn-primary">
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-body" id="calendar-display">
+                        <div class="card-body" id="calendarContainer">
 
                         </div>
                     </div>
