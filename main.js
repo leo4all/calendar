@@ -1,24 +1,21 @@
 function Calendar(options) {
   this.id = options.el;
-  this.sDate = options.startDate;
+  this.sDate = new Date(Date.parse(options.startDate) + 86400000);
+  this.endDate = null;
   this.nDays = parseInt(options.daysNumer);
   this.color = options.colors;
   this.options = {};
 
   this.setLanguage(options.lang);
 
-  var startDate = new Date(this.sDate);
-  var endDate = this.addDays(this.nDays);
-  var nMonths = this.calcDate(startDate, endDate);
+  this.endDate = this.addDays(this.nDays);
 
-  for (var i = 0; i < nMonths; i++) {
-    this.drawMonths();
+  var nMonths = this.calcDate(this.sDate, this.endDate);
+
+  for (var i = 0; i < nMonths.length; i++) {
+    console.log("MOnth");
+    this.drawMonths(nMonths[i]);
   }
-
-  this.label = [];
-  this.labels = [];
-
-  console.log("Calendar");
 }
 
 Calendar.prototype = {
@@ -35,9 +32,20 @@ Calendar.prototype.calcDate = function(sDate, fDate) {
   if (sDate > fDate) {
     return;
   }
-  months = (fDate.getFullYear() - sDate.getFullYear()) * 12;
-  months += fDate.getMonth() - sDate.getMonth();
-  return months;
+
+  var dateMap = [];
+  var currentDate = sDate;
+  var i = 0;
+  while (currentDate <= fDate) {
+    var newMonth = currentDate.getMonth() + i;
+    var newYear = newMonth > 11 ? sDate.getFullYear() + 1 : sDate.getFullYear();
+
+    newMonth = newMonth > 11 ? newMonth - 12 : newMonth;
+    currentDate = new Date(newYear, newMonth, "1");
+    dateMap.push(currentDate);
+    i++;
+  }
+  return dateMap;
 };
 
 Calendar.prototype.setLanguage = function(lang) {
@@ -56,7 +64,7 @@ Calendar.prototype.setLanguage = function(lang) {
     "November",
     "December"
   ];
-  this.options.label = [
+  this.options.days = [
     "Sunday",
     "Monday",
     "Tuesday",
@@ -67,17 +75,70 @@ Calendar.prototype.setLanguage = function(lang) {
   ];
 };
 
-Calendar.prototype.createCalendar = function(month, year) {};
 
-Calendar.prototype.drawMonths = function() {
+Calendar.prototype.drawMonths = function(mDate) {
+  let today = new Date();
+  let firstDay = mDate.getDay();
+  let daysInMonth = 32 - mDate.getDate();
+
   var theCalendar = document.createElement("div");
-  for (var i = 0; i < this.labels.length; i++) {
-    var month = this.labels[i].month;
-    var year = this.labels[i].year;
+  theCalendar.className = "calendar";
 
-    this.createCalendar(month, year);
+  var calHeader = document.createElement("div");
+  calHeader.innerHTML =
+    this.options.months[mDate.getMonth()] + " " + mDate.getFullYear();
+  calHeader.className = "cal-header";
+  theCalendar.appendChild(calHeader);
+
+  var calWeek = document.createElement("div");
+  calWeek.className = "cal-week";
+  for (var i = 0; i < this.options.days.length; i++) {
+    var theLabel = document.createElement("span");
+    theLabel.className = "day-of-week";
+    theLabel.appendChild(
+      document.createTextNode(this.options.days[i]).cloneNode(true)
+    );
+    calWeek.appendChild(theLabel.cloneNode(true));
   }
 
+  theCalendar.appendChild(calWeek.cloneNode(true));
+
+  var calDays = document.createElement("div");
+  calDays.className = "cal-days";
+  var theRows = [],
+    theDays = [];
+  let date = 1;
+  for (let i = 0; i < 6; i++) {
+    theRows[i] = document.createElement("div");
+    theRows[i].className = "cal-row row";
+    for (let j = 0; j < 7; j++) {
+      theDays[j] = document.createElement("label");
+      if (i === 0 && j < firstDay) {
+        theDays[j].className = "mute day";
+        let cellText = document.createTextNode("");
+        theDays[j].appendChild(cellText);
+        theRows[i].appendChild(theDays[j]);
+      } else if (date > daysInMonth) {
+        break;
+      } else {
+        theDays[j].className = "no-mute day";
+
+        let cellText = document.createTextNode(date);
+        if (date === today.getDate() && mDate.getFullYear() === today.getFullYear() && mDate.getMonth() === today.getMonth()) {
+          theDays[j].classList.add("bg-info");
+        }
+        theDays[j].appendChild(cellText);
+        theRows[i].appendChild(theDays[j]);
+        date++;
+      }
+    }
+  }
+
+  for (var i = 0; i < 6; i++) {
+    calDays.appendChild(theRows[i].cloneNode(true));
+  }
+
+  theCalendar.appendChild(calDays.cloneNode(true));
   document.getElementById(this.id).appendChild(theCalendar.cloneNode(true));
 };
 
@@ -99,5 +160,4 @@ window.addEventListener("load", function() {
 
     new Calendar(options);
   });
-
 });

@@ -1,0 +1,64 @@
+
+.cal-week {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    /* -webkit-box-direction: normal; */
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.cal-week > .day-of-week {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.row {
+    width: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.cal-days .day {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    border-bottom: 1px solid rgba(21, 21, 21, .12);
+    border-right: 1px solid rgba(21, 21, 21, .12);
+    cursor: pointer;
+    -webkit-transition: box-shadow 200ms ease-in-out;
+    transition: box-shadow 200ms ease-in-out;
+}
