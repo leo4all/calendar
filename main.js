@@ -7,14 +7,13 @@ function Calendar(options) {
   this.options = {};
 
   this.setLanguage(options.lang);
-
+  document.getElementById(this.id)
   this.endDate = this.addDays(this.nDays);
-
   var nMonths = this.calcDate(this.sDate, this.endDate);
 
+  this.clearDraw();
   for (var i = 0; i < nMonths.length; i++) {
-    console.log("MOnth");
-    this.drawMonths(nMonths[i]);
+    this.drawMonths(nMonths[i], i);
   }
 }
 
@@ -29,24 +28,23 @@ Calendar.prototype.addDays = function(days) {
 };
 
 Calendar.prototype.calcDate = function(sDate, fDate) {
-  if (sDate > fDate) {
-    return;
-  }
+    if (sDate > fDate) {
+      return;
+    }
 
-  var dateMap = [];
-  var currentDate = sDate;
-  var i = 0;
-  while (currentDate <= fDate) {
-    var newMonth = currentDate.getMonth() + i;
-    var newYear = newMonth > 11 ? sDate.getFullYear() + 1 : sDate.getFullYear();
-
-    newMonth = newMonth > 11 ? newMonth - 12 : newMonth;
-    currentDate = new Date(newYear, newMonth, "1");
-    dateMap.push(currentDate);
-    i++;
-  }
-  return dateMap;
-};
+    var dateMap = [];
+    var currentDate = sDate;
+    var i = 0;
+    while (currentDate < fDate) {
+      var newMonth = (!i) ? currentDate.getMonth() :(currentDate.getMonth() + 1);
+      var newYear = newMonth > 11 ? (sDate.getFullYear() + 1) : sDate.getFullYear();
+      newMonth = newMonth > 11 ? (newMonth - 12) : newMonth;
+      currentDate = new Date(newYear, newMonth, "1");
+      dateMap.push(currentDate);
+      ++i;
+    }
+    return dateMap;
+  };
 
 Calendar.prototype.setLanguage = function(lang) {
   // ? TODO load dynamic language
@@ -75,10 +73,13 @@ Calendar.prototype.setLanguage = function(lang) {
   ];
 };
 
+Calendar.prototype.clearDraw = function(){
+    document.getElementById(this.id).innerHTML = "";
+};
 
 Calendar.prototype.drawMonths = function(mDate) {
   let today = new Date();
-  let firstDay = mDate.getDay();
+  let firstDay = new Date(mDate.getFullYear(), mDate.getMonth(), 1).getDay();
   let daysInMonth = 32 - mDate.getDate();
 
   var theCalendar = document.createElement("div");
