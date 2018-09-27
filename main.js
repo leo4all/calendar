@@ -33,15 +33,15 @@ Calendar.prototype.calcDate = function(sDate, fDate) {
     }
 
     var dateMap = [];
-    var currentDate = sDate;
-    var i = 0;
-    while (currentDate < fDate) {
-      var newMonth = (!i) ? currentDate.getMonth() :(currentDate.getMonth() + 1);
+    var currentDate = new Date(sDate.getFullYear(), sDate.getMonth(), 1);
+    var lastDate  = new Date(fDate.getFullYear(), fDate.getMonth(), 1);
+
+    while (currentDate <= lastDate) {
+      var newMonth = currentDate.getMonth() + 1;
       var newYear = newMonth > 11 ? (sDate.getFullYear() + 1) : sDate.getFullYear();
       newMonth = newMonth > 11 ? (newMonth - 12) : newMonth;
-      currentDate = new Date(newYear, newMonth, "1");
       dateMap.push(currentDate);
-      ++i;
+      currentDate = new Date(newYear, newMonth, "1");
     }
     return dateMap;
   };
