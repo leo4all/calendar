@@ -1,64 +1,56 @@
-
-.cal-week {
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    /* -webkit-box-direction: normal; */
-    -ms-flex-direction: row;
-    flex-direction: row;
+.card{
+    background-color:transparent;
+}
+#calendarContainer {
+    padding-top: 20px;
+    margin-left: 30px;
+    background-color: #fff;
 }
 
-.cal-week > .day-of-week {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+.calendar {
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+table {
+    height: 100%;
+    width: 270px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    background-color: #eee;
+}
+
+table tr {
+    height: 24px;
+    width: 100%;
+}
+
+table th {
+    width: 14%;
     font-size: 12px;
-    text-transform: uppercase;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -ms-flex-line-pack: center;
-    align-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-align: center;
 }
 
-.row {
-    width: 100%;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
+table .month-header {
+    text-align: center;
+    background-color: palegreen;
 }
 
-.cal-days .day {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    padding: 5px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    border-bottom: 1px solid rgba(21, 21, 21, .12);
-    border-right: 1px solid rgba(21, 21, 21, .12);
-    cursor: pointer;
-    -webkit-transition: box-shadow 200ms ease-in-out;
-    transition: box-shadow 200ms ease-in-out;
+table td {
+    width: 14%;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    border: 1px solid white;
+    text-align: center;
+}
+
+table td.week-end {
+    background-color: yellow;
+}
+
+table td.week-day {
+    background-color: greenyellow;
 }
